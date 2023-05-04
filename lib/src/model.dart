@@ -324,12 +324,25 @@ class Currency {
 
 @JsonSerializable()
 class Components {
+  @JsonKey(name: 'ISO_3166-1_alpha-2')
+  final String? ISO_3166_1_alpha_2;
+  @JsonKey(name: 'ISO_3166-1_alpha-3')
+  final String? ISO_3166_1_alpha_3;
+  @JsonKey(name: 'ISO_3166-2')
+  final List<String>? ISO_3166_2;
+  @JsonKey(name: '_type')
+  final String? type;
+  @JsonKey(name: '_category')
+  final String? category;
   final String? city;
   final String? state;
   final String? country;
   final String? county;
   final String? road;
   final String? suburb;
+  final String? continent;
+  final String? postcode;
+  final String? restaurant;
   @JsonKey(name: 'house_number')
   final String? houseNumber;
   @JsonKey(name: 'country_code')
@@ -340,8 +353,6 @@ class Components {
   final String? stateDistrict;
   @JsonKey(name: 'political_union')
   final String? politicalUnion;
-  @JsonKey(name: '_type')
-  final String? type;
 
   const Components(
     this.type,
@@ -356,6 +367,13 @@ class Components {
     this.road,
     this.houseNumber,
     this.politicalUnion,
+    this.continent,
+    this.ISO_3166_1_alpha_2,
+    this.ISO_3166_1_alpha_3,
+    this.ISO_3166_2,
+    this.postcode,
+    this.restaurant,
+    this.category,
   );
 
   factory Components.fromJson(Map<String, dynamic> json) =>

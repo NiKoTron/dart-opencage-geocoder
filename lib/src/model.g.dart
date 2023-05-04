@@ -249,22 +249,36 @@ Components _$ComponentsFromJson(Map<String, dynamic> json) => Components(
       json['road'] as String?,
       json['house_number'] as String?,
       json['political_union'] as String?,
+      json['continent'] as String?,
+      json['ISO_3166-1_alpha-2'] as String?,
+      json['ISO_3166-1_alpha-3'] as String?,
+      (json['ISO_3166-2'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      json['postcode'] as String?,
+      json['restaurant'] as String?,
+      json['_category'] as String?,
     );
 
 Map<String, dynamic> _$ComponentsToJson(Components instance) =>
     <String, dynamic>{
+      'ISO_3166-1_alpha-2': instance.ISO_3166_1_alpha_2,
+      'ISO_3166-1_alpha-3': instance.ISO_3166_1_alpha_3,
+      'ISO_3166-2': instance.ISO_3166_2,
+      '_type': instance.type,
+      '_category': instance.category,
       'city': instance.city,
       'state': instance.state,
       'country': instance.country,
       'county': instance.county,
       'road': instance.road,
       'suburb': instance.suburb,
+      'continent': instance.continent,
+      'postcode': instance.postcode,
+      'restaurant': instance.restaurant,
       'house_number': instance.houseNumber,
       'country_code': instance.countryCode,
       'city_district': instance.cityDistrict,
       'state_district': instance.stateDistrict,
       'political_union': instance.politicalUnion,
-      '_type': instance.type,
     };
 
 Result _$ResultFromJson(Map<String, dynamic> json) => Result(
