@@ -1,8 +1,9 @@
 import 'package:opencage_geocoder/opencage_geocoder.dart';
 import 'dump.dart';
 
-main() async {
-  var geocoder = const Geocoder("YOUR_KEY");
+Future<void> main(List<String> arguments) async {
+  final apiKey = arguments[0];
+  var geocoder = Geocoder(apiKey);
 
   print(
       'GEOCODING -------------------------------------------------------------------------------------');

@@ -110,6 +110,11 @@ class What3words {
 @JsonSerializable()
 class Timezone {
   final String name;
+  @JsonKey(
+    name: 'short_name',
+    fromJson: _shortNameFromJson,
+    toJson: _shortNameToJson,
+  )
   final String shortName;
   @JsonKey(name: 'now_in_dst')
   final double nowInDst;
@@ -126,13 +131,11 @@ class Timezone {
     this.offsetString,
   );
 
-  factory Timezone.fromJson(Map<String, dynamic> json) {
-    // Fix needed since short_name can be string or double
-    var result = _$TimezoneFromJson(json);
-    var short_name = json['short_name']?.toString();
-    return new Timezone(result.name, short_name, result.nowInDst,
-        result.offsetSec, result.offsetString);
-  }
+  factory Timezone.fromJson(Map<String, dynamic> json) =>
+      _$TimezoneFromJson(json);
+
+  static _shortNameToJson(String value) => value;
+  static String _shortNameFromJson(dynamic value) => '$value';
 }
 
 @JsonSerializable()
@@ -172,13 +175,16 @@ class Sun {
 
 @JsonSerializable()
 class OSM {
-  final String url;
+  final String? url;
   @JsonKey(name: 'edit_url')
-  final String editUrl;
+  final String? editUrl;
+  @JsonKey(name: 'note_url')
+  final String? noteUrl;
 
   const OSM(
     this.url,
     this.editUrl,
+    this.noteUrl,
   );
 
   factory OSM.fromJson(Map<String, dynamic> json) => _$OSMFromJson(json);
@@ -219,25 +225,25 @@ class Licence {
 
 @JsonSerializable()
 class Annotations {
-  final Currency currency;
-  final String flag;
-  final String geohash;
-  final double qibla;
-  final Sun sun;
-  final Timezone timezone;
-  final What3words what3words;
+  final Currency? currency;
+  final String? flag;
+  final String? geohash;
+  final double? qibla;
+  final Sun? sun;
+  final Timezone? timezone;
+  final What3words? what3words;
   @JsonKey(name: 'Maidenhead')
-  final String maidenhead;
+  final String? maidenhead;
   @JsonKey(name: 'Mercator')
-  final Point mercator;
+  final Point? mercator;
   @JsonKey(name: 'callingcode')
-  final int callingCode;
+  final int? callingCode;
   @JsonKey(name: 'DMS')
-  final DMS dms;
+  final DMS? dms;
   @JsonKey(name: 'MGRS')
-  final String mgrs;
+  final String? mgrs;
   @JsonKey(name: 'OSM')
-  final OSM osm;
+  final OSM? osm;
 
   const Annotations(
     this.dms,
@@ -318,24 +324,24 @@ class Currency {
 
 @JsonSerializable()
 class Components {
-  final String city;
-  final String state;
-  final String country;
-  final String county;
-  final String road;
-  final String suburb;
+  final String? city;
+  final String? state;
+  final String? country;
+  final String? county;
+  final String? road;
+  final String? suburb;
   @JsonKey(name: 'house_number')
-  final String houseNumber;
+  final String? houseNumber;
   @JsonKey(name: 'country_code')
-  final String countryCode;
+  final String? countryCode;
   @JsonKey(name: 'city_district')
-  final String cityDistrict;
+  final String? cityDistrict;
   @JsonKey(name: 'state_district')
-  final String stateDistrict;
+  final String? stateDistrict;
   @JsonKey(name: 'political_union')
-  final String politicalUnion;
+  final String? politicalUnion;
   @JsonKey(name: '_type')
-  final String type;
+  final String? type;
 
   const Components(
     this.type,
@@ -381,7 +387,8 @@ class Result {
 class GeocoderResponse {
   final List<Licence> licenses;
   final String documentation;
-  final Rate rate;
+  final Rate? rate;
+  final Status status;
   final List<Result> results;
   final String thanks;
   final Timestamp timestamp;
@@ -394,6 +401,7 @@ class GeocoderResponse {
     this.licenses,
     this.documentation,
     this.rate,
+    this.status,
     this.stayInformed,
     this.thanks,
     this.timestamp,

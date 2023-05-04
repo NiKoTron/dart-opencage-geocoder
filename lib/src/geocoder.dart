@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:convert';
+
+import 'package:opencage_geocoder/src/http_service/http_service.dart';
 
 import 'model.dart';
 
@@ -8,28 +9,34 @@ import 'model.dart';
 ///
 /// More details here : https://opencagedata.com/.
 class Geocoder {
-  static const String host = "https://api.opencagedata.com/geocode/v1/json";
+  static const String host = 'https://api.opencagedata.com/geocode/v1/json';
 
-  final String _baseUrl;
+  late final HttpService _httpService;
 
   /// Create an OpenCage geocoder for the given [apiKey].
-  const Geocoder(String apiKey) : this._baseUrl = "${host}?key=${apiKey}";
+  Geocoder(String apiKey, [HttpClient? client]) {
+    final baseUrl = '${host}?key=${apiKey}';
+
+    _httpService = HttpService.http(baseUrl, client: client);
+  }
 
   /// Get coordinates and data from a search [query].
   ///
   /// All optional parameters are described here : https://opencagedata.com/api#request.
-  Future<GeocoderResponse> geocode(String query,
-      {String language = "en",
-      String countryCode = null,
-      Bounds bounds = null,
-      bool abbrv = false,
-      int limit = 10,
-      int minConfidence = 0,
-      bool noAnnotations = false,
-      bool noDedupe = false,
-      bool noRecord = false,
-      bool addRequest = false}) {
-    return _send({
+  Future<GeocoderResponse> geocode(
+    String query, {
+    String language = "en",
+    String? countryCode = null,
+    Bounds? bounds = null,
+    bool abbrv = false,
+    int limit = 10,
+    int minConfidence = 0,
+    bool noAnnotations = false,
+    bool noDedupe = false,
+    bool noRecord = false,
+    bool addRequest = false,
+  }) {
+    return _httpService.send({
       'q': query,
       'language': language,
       'countryCode': countryCode,
@@ -51,8 +58,8 @@ class Geocoder {
     double latitude,
     double longitude, {
     String language = "en",
-    String countryCode = null,
-    Bounds bounds = null,
+    String? countryCode = null,
+    Bounds? bounds = null,
     bool abbrv = false,
     int limit = 10,
     int minConfidence = 0,
@@ -74,39 +81,5 @@ class Geocoder {
       noRecord: noRecord,
       addRequest: addRequest,
     );
-  }
-
-  Future<GeocoderResponse> _send(Map args) async {
-    var httpClient = new HttpClient();
-    var uri = _createUrl(args);
-    var request = await httpClient.getUrl(uri);
-    var response = await request.close();
-    var jsonString = await utf8.decoder.bind(response).join();
-    var data = json.decode(jsonString);
-    return new GeocoderResponse.fromJson(data);
-  }
-
-  Uri _createUrl(Map queryArgs) {
-    var result = new StringBuffer(this._baseUrl);
-    queryArgs.forEach((key, value) {
-      if (value != null && value != false) {
-        var formattedValue = _formatQueryArgValue(value);
-        result.write("&${key}=${formattedValue}");
-      }
-    });
-    return Uri.parse(result.toString());
-  }
-
-  String _formatQueryArgValue(Object value) {
-    if (value is bool) {
-      return value ? "1" : "0";
-    }
-    if (value is Bounds) {
-      return "${value.northeast.longitude}%2C${value.northeast.latitude}%2C${value.southwest.longitude}%2C${value.southwest.latitude}";
-    }
-    if (value is int || value is double) {
-      return value.toString();
-    }
-    return Uri.encodeComponent(value.toString());
   }
 }
