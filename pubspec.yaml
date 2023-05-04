@@ -1,8 +1,7 @@
 name: opencage_geocoder
 description: Dart client for the OpenCage forward/reverse geocoding API
-version: 2.0.0-dev.1
+version: 2.0.0-dev.2
 homepage: https://github.com/aloisdeniel/dart-opencage-geocoder
-author: Aloïs Deniel <alois.deniel@outlook.com>
 
 environment:
   sdk: '>=2.19.0 <3.0.0'

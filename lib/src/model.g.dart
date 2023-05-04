@@ -282,7 +282,9 @@ Map<String, dynamic> _$ComponentsToJson(Components instance) =>
     };
 
 Result _$ResultFromJson(Map<String, dynamic> json) => Result(
-      Annotations.fromJson(json['annotations'] as Map<String, dynamic>),
+      json['annotations'] == null
+          ? null
+          : Annotations.fromJson(json['annotations'] as Map<String, dynamic>),
       Components.fromJson(json['components'] as Map<String, dynamic>),
       Bounds.fromJson(json['bounds'] as Map<String, dynamic>),
       json['confidence'] as int,

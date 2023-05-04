@@ -20,6 +20,8 @@ class Coordinates {
       _$CoordinatesFromJson(json);
 
   String toString() => "{$latitude,$longitude}";
+
+  Map<String, dynamic> tojson() => _$CoordinatesToJson(this);
 }
 
 @JsonSerializable()
@@ -35,6 +37,8 @@ class Point {
   factory Point.fromJson(Map<String, dynamic> json) => _$PointFromJson(json);
 
   String toString() => "{$x,$y}";
+
+  Map<String, dynamic> tojson() => _$PointToJson(this);
 }
 
 @JsonSerializable()
@@ -50,6 +54,8 @@ class Bounds {
   factory Bounds.fromJson(Map<String, dynamic> json) => _$BoundsFromJson(json);
 
   String toString() => "{ne:$northeast,sw:$southwest}";
+
+  Map<String, dynamic> tojson() => _$BoundsToJson(this);
 }
 
 @JsonSerializable()
@@ -68,6 +74,8 @@ class Timestamp {
       _$TimestampFromJson(json);
 
   String toString() => "{http:$createdHttp,unix:$createdUnix}";
+
+  Map<String, dynamic> tojson() => _$TimestampToJson(this);
 }
 
 @JsonSerializable()
@@ -82,6 +90,8 @@ class StayInformed {
 
   factory StayInformed.fromJson(Map<String, dynamic> json) =>
       _$StayInformedFromJson(json);
+
+  Map<String, dynamic> tojson() => _$StayInformedToJson(this);
 }
 
 @JsonSerializable()
@@ -95,6 +105,8 @@ class Status {
   );
 
   factory Status.fromJson(Map<String, dynamic> json) => _$StatusFromJson(json);
+
+  Map<String, dynamic> tojson() => _$StatusToJson(this);
 }
 
 @JsonSerializable()
@@ -105,6 +117,8 @@ class What3words {
 
   factory What3words.fromJson(Map<String, dynamic> json) =>
       _$What3wordsFromJson(json);
+
+  Map<String, dynamic> tojson() => _$What3wordsToJson(this);
 }
 
 @JsonSerializable()
@@ -136,6 +150,8 @@ class Timezone {
 
   static _shortNameToJson(String value) => value;
   static String _shortNameFromJson(dynamic value) => '$value';
+
+  Map<String, dynamic> tojson() => _$TimezoneToJson(this);
 }
 
 @JsonSerializable()
@@ -156,6 +172,8 @@ class Rise {
 
   String toString() =>
       "{nautical:$nautical, apparent:$apparent, astronomical:$astronomical, civil:$civil}";
+
+  Map<String, dynamic> tojson() => _$RiseToJson(this);
 }
 
 @JsonSerializable()
@@ -171,6 +189,8 @@ class Sun {
   factory Sun.fromJson(Map<String, dynamic> json) => _$SunFromJson(json);
 
   String toString() => "{rise:$rise, set:$set}";
+
+  Map<String, dynamic> tojson() => _$SunToJson(this);
 }
 
 @JsonSerializable()
@@ -190,6 +210,8 @@ class OSM {
   factory OSM.fromJson(Map<String, dynamic> json) => _$OSMFromJson(json);
 
   String toString() => "{url:$url, edit:$editUrl}";
+
+  Map<String, dynamic> tojson() => _$OSMToJson(this);
 }
 
 @JsonSerializable()
@@ -205,6 +227,8 @@ class Rate {
   );
 
   factory Rate.fromJson(Map<String, dynamic> json) => _$RateFromJson(json);
+
+  Map<String, dynamic> tojson() => _$RateToJson(this);
 }
 
 @JsonSerializable()
@@ -221,6 +245,7 @@ class Licence {
       _$LicenceFromJson(json);
 
   String toString() => "{$name:$url}";
+  Map<String, dynamic> tojson() => _$LicenceToJson(this);
 }
 
 @JsonSerializable()
@@ -263,6 +288,7 @@ class Annotations {
 
   factory Annotations.fromJson(Map<String, dynamic> json) =>
       _$AnnotationsFromJson(json);
+  Map<String, dynamic> tojson() => _$AnnotationsToJson(this);
 }
 
 @JsonSerializable()
@@ -280,6 +306,8 @@ class DMS {
   factory DMS.fromJson(Map<String, dynamic> json) => _$DMSFromJson(json);
 
   String toString() => "{$latitude,$longitude}";
+
+  Map<String, dynamic> tojson() => _$DMSToJson(this);
 }
 
 @JsonSerializable()
@@ -320,6 +348,7 @@ class Currency {
 
   factory Currency.fromJson(Map<String, dynamic> json) =>
       _$CurrencyFromJson(json);
+  Map<String, dynamic> tojson() => _$CurrencyToJson(this);
 }
 
 @JsonSerializable()
@@ -378,11 +407,13 @@ class Components {
 
   factory Components.fromJson(Map<String, dynamic> json) =>
       _$ComponentsFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ComponentsToJson(this);
 }
 
 @JsonSerializable()
 class Result {
-  final Annotations annotations;
+  final Annotations? annotations;
   final Components components;
   final int confidence;
   final String formatted;
@@ -399,6 +430,7 @@ class Result {
   );
 
   factory Result.fromJson(Map<String, dynamic> json) => _$ResultFromJson(json);
+  Map<String, dynamic> toJson() => _$ResultToJson(this);
 }
 
 @JsonSerializable()
@@ -429,4 +461,5 @@ class GeocoderResponse {
 
   factory GeocoderResponse.fromJson(Map<String, dynamic> json) =>
       _$GeocoderResponseFromJson(json);
+  Map<String, dynamic> tojson() => _$GeocoderResponseToJson(this);
 }

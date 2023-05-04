@@ -39,37 +39,37 @@ class Dumper {
       print('      houseNumber: ${r.components.houseNumber}');
       print('      road: ${r.components.road}');
       print('   annotations:');
-      print('      callingCode: ${r.annotations.callingCode}');
-      print('      dms: ${r.annotations.dms}');
-      print('      flag: ${r.annotations.flag}');
-      print('      geohash: ${r.annotations.geohash}');
-      print('      maidenhead: ${r.annotations.maidenhead}');
-      print('      mercator: ${r.annotations.mercator}');
-      print('      mgrs: ${r.annotations.mgrs}');
-      print('      osm: ${r.annotations.osm}');
-      print('      qibla: ${r.annotations.qibla}');
-      print('      sun: ${r.annotations.sun}');
+      print('      callingCode: ${r.annotations?.callingCode}');
+      print('      dms: ${r.annotations?.dms}');
+      print('      flag: ${r.annotations?.flag}');
+      print('      geohash: ${r.annotations?.geohash}');
+      print('      maidenhead: ${r.annotations?.maidenhead}');
+      print('      mercator: ${r.annotations?.mercator}');
+      print('      mgrs: ${r.annotations?.mgrs}');
+      print('      osm: ${r.annotations?.osm}');
+      print('      qibla: ${r.annotations?.qibla}');
+      print('      sun: ${r.annotations?.sun}');
       print('      timezone:');
-      print('          name: ${r.annotations.timezone?.name}');
-      print('          shortName: ${r.annotations.timezone?.shortName}');
-      print('          nowInDst: ${r.annotations.timezone?.nowInDst}');
-      print('          offsetSec: ${r.annotations.timezone?.offsetSec}');
-      print('          offsetString: ${r.annotations.timezone?.offsetString}');
+      print('          name: ${r.annotations?.timezone?.name}');
+      print('          shortName: ${r.annotations?.timezone?.shortName}');
+      print('          nowInDst: ${r.annotations?.timezone?.nowInDst}');
+      print('          offsetSec: ${r.annotations?.timezone?.offsetSec}');
+      print('          offsetString: ${r.annotations?.timezone?.offsetString}');
       print('      currency:');
-      print('          name: ${r.annotations.currency?.name}');
-      print('          decimalMark: ${r.annotations.currency?.decimalMark}');
-      print('          htmlEntity: ${r.annotations.currency?.htmlEntity}');
-      print('          isoCode: ${r.annotations.currency?.isoCode}');
-      print('          isoNumeric: ${r.annotations.currency?.isoNumeric}');
+      print('          name: ${r.annotations?.currency?.name}');
+      print('          decimalMark: ${r.annotations?.currency?.decimalMark}');
+      print('          htmlEntity: ${r.annotations?.currency?.htmlEntity}');
+      print('          isoCode: ${r.annotations?.currency?.isoCode}');
+      print('          isoNumeric: ${r.annotations?.currency?.isoNumeric}');
       print(
-          '          smallestDenomination: ${r.annotations.currency?.smallestDenomination}');
-      print('          subunit: ${r.annotations.currency?.subunit}');
+          '          smallestDenomination: ${r.annotations?.currency?.smallestDenomination}');
+      print('          subunit: ${r.annotations?.currency?.subunit}');
       print(
-          '          subunitToUnit: ${r.annotations.currency?.subunitToUnit}');
-      print('          symbol: ${r.annotations.currency?.symbol}');
-      print('          symbolFirst: ${r.annotations.currency?.symbolFirst}');
+          '          subunitToUnit: ${r.annotations?.currency?.subunitToUnit}');
+      print('          symbol: ${r.annotations?.currency?.symbol}');
+      print('          symbolFirst: ${r.annotations?.currency?.symbolFirst}');
       print(
-          '          thousandsSeparator: ${r.annotations.currency?.thousandsSeparator}');
+          '          thousandsSeparator: ${r.annotations?.currency?.thousandsSeparator}');
     });
   }
 }
